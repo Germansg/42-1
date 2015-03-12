@@ -21,50 +21,29 @@ int		ft_brutexec(char **line, t_env **env)
 {
 	char	**tab_env;
 	pid_t	pid;
-	int		i;
-	int		ret;
 
 	printf("SLT C BRUTEXEC\n");
-	pid = 0;
-	i = 0;
 	tab_env = NULL;
-	ret = 0;
 	if ((access(line[0], F_OK) == 0) && (access(line[0], X_OK) == 0))
 		pid = fork();
 	else
 		return (0);
-	if (pid < 0)
-		printf("ERROR FORK\n");
 	if (pid > 0)
-	{
 		wait(NULL);
-	}
 	else if (pid == 0)
 	{
-		while (line[i])
-		{
-			printf("LINE BRUTEXEC[%d] = [%s]\n", i, line[i]);
-			i++;
-		}
-		i = 0;
 		tab_env = ft_list_to_array(env);
-		// while (tab_env[i])
-	 // 	{
-		// 	printf("TAB_ENV IN BRUTEX[%d] = [%s]\n", i, tab_env[i]);
-		// 	i++;
-		// }
-		if (access(line[0], F_OK) == 0)
+		if (ft_find_node(env, "PATH") == 0)
 		{
-			if (access(line[0], X_OK) == 0)
-			{
-				execve(line[0], line, tab_env);
-				ft_exit(1);
-			}
-			else
-				return (0);
+			execve(line[0], line, tab_env);
+			ft_exit(1);
+		}	
+		if (access(line[0], X_OK) == 0)
+		{
+			execve(line[0], line, tab_env);
+			ft_exit(1);
 		}
-		else
-			return(0);
+		return (0);
 	}
 	return (1);
 }

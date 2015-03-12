@@ -47,7 +47,7 @@ int		ft_replace_env(char **line, t_env **env)
 
 	tmp = *env;
 	tmp_name = ft_strsplit(line[1], '=');
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp && tmp->name && tmp->var)
 			if (ft_strcmp(tmp_name[0], tmp->name) == 0)

@@ -10,13 +10,13 @@
 #                                                                              #
 #******************************************************************************#
 
-SRC = ft_sh1.c ft_readentry.c ft_envmanage.c ft_utilities.c ft_sh1.h ft_list_to_array.c ft_errors.c
+SRC = ft_sh1.c ft_readentry.c ft_envmanage.c ft_utilities.c ft_sh1.h ft_list_to_array.c ft_errors.c ft_util2.c
 
 OBJ = $(SRC:.c=.o)
 
 NAME = ft_minishell1
 
-FLAGS = -Wall -Werror -Wextra -I libft/
+FLAGS = -Wall -Werror -Wextra -I libft/ -L libft/includes
 
 CC = gcc
 

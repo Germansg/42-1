@@ -89,4 +89,10 @@ void	ft_exit(int n);
 int		ft_listlength(t_env *env);
 char	**ft_list_to_array(t_env **env);
 
+/*
+** ft_utilities2.c
+*/
+
+int		ft_find_node(t_env **env, char *str);
+
 #endif

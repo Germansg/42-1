@@ -12,11 +12,7 @@
 
 //gerer sans env 50%
 //gerer toutes les errs X
-//lancer des executables autres que ls etc... OK
 //gerer les signaux X
-//ne pas tester les path des binaires sur le 1er mais seulent sur PATH OK
-//cd qui segfault qd env nul OK
-//qd on setenv , verifier qu'il n'existe pas deja. si oui . remplacer sa VAR OK
 
 #include "ft_sh1.h"
 
