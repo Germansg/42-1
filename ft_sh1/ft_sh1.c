@@ -26,8 +26,7 @@ void	ft_fill_list(t_env **llist, char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (!(node = (t_env*)malloc(sizeof(node))))
-			return ;
+		node = (t_env*)malloc(sizeof(node));
 		tmp = ft_strsplit(env[i], '=');
 		node->name = ft_strdup(tmp[0]);
 		node->var = ft_strsplit(tmp[1], ':');
@@ -78,7 +77,6 @@ void	ft_cleanline(char *line, t_env **e)
 	}
 	line = ft_strtrim(line);
 	ret = ft_strsplit(line, ' ');
-	printf("ret = [%s]\n", ret[0]);
 	ft_readentry(ret, e);
 }
 
@@ -107,9 +105,7 @@ int		main(int ac, char **av, char **env)
 
 	e = NULL;
 	if (ac || av)
-	{
 		while (42)
 			e = ft_sh1(env, e);
-	}
 	return (0);
 }

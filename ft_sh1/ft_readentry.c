@@ -21,7 +21,7 @@ int		ft_readentry(char **line, t_env **env)
 	return (0);
 }
 
-int		ft_executebin(char **line, char *path, t_env **env) //execve fork etc
+int		ft_executebin(char **line, char *path, t_env **env)
 {
 	char	**tab_env;
 	pid_t	pid;
@@ -38,17 +38,6 @@ int		ft_executebin(char **line, char *path, t_env **env) //execve fork etc
 	{
 		i = 0;
 		tab_env = ft_list_to_array(env);
-		// while (tab_env[i])
-		// {
-		// 	printf("TAB_ENV[%d] = [%s]\n", i, tab_env[i]);
-		// 	i++;
-		// }
-		printf("PATH EX= [%s]\n", path);
-		while (line[i])
-		{
-			printf("LINE[%d] = [%s]\n", i, line[i]);
-			i++;
-		}
 		if (execve(path, line, tab_env) != 0)
 		{
 			ft_exit (1);
@@ -78,10 +67,8 @@ int		ft_isbinary(char **line, t_env **env)
 	paths = tmp->var;
 	while (paths[i])
 	{
-		printf("PATH[%d] = [%s]\n", i, paths[i]);
 		joined = ft_strjoin(paths[i], "/");
 		bin = ft_strjoin(joined, line[0]);
-		printf("bin = [%s]\n", bin);
 		if (access(bin, F_OK) == 0)
 		{
 			if (access(bin, X_OK) == 0)
@@ -90,7 +77,7 @@ int		ft_isbinary(char **line, t_env **env)
 				return (1);
 			}
 			else
-				break ;
+				break ; //peut etre ajouter droit d'exec ici print err
 		}
 		else
 		{
@@ -121,6 +108,35 @@ int		ft_isbuiltin(char **line, t_env **env)
 	return(0);
 }
 
+int		ft_movedir(char **line, t_env **env)
+{
+	t_env 	*tmp_pwd;
+	t_env 	*tmp_oldpwd;
+
+	tmp_pwd = *env;
+	tmp_oldpwd = *env;
+	if (line[1] == NULL || line[1][0] == '~')
+	{
+		while (tmp_pwd && (ft_strcmp(tmp_pwd->name, "HOME") != 0))
+			tmp_pwd = tmp_pwd->nxt;
+		if (tmp_pwd && tmp_pwd->var[0])
+			return(chdir(tmp_pwd->var[0]));
+	}
+	else if (line[1][0] == '-')
+	{
+		while (tmp_oldpwd && (ft_strcmp(tmp_oldpwd->name, "OLDPWD") != 0))
+			tmp_oldpwd = tmp_oldpwd->nxt;
+		if (tmp_oldpwd && tmp_oldpwd->var[0])
+			return (chdir(tmp_oldpwd->var[0]));
+	}
+	else
+	{
+		tmp_pwd = *env;
+		return (chdir(line[1]));
+	}
+	return (-1);
+}
+
 int		ft_cd(char **line, t_env **env)
 {
 	char	buf[PATH_MAX];
@@ -129,28 +145,12 @@ int		ft_cd(char **line, t_env **env)
 
 	tmp_pwd = *env;
 	tmp_oldpwd = *env;
-	if (line[1] == NULL || line[1][0] == '~')
+	if (ft_movedir(line, env) == -1)
 	{
-		printf("CC DEBUG\n");
-		while (tmp_pwd && (ft_strcmp(tmp_pwd->name, "HOME") != 0))
-			tmp_pwd = tmp_pwd->nxt;
-		if (tmp_pwd && tmp_pwd->var[0])
-			chdir(tmp_pwd->var[0]);
-	}
-	else if (line[1][0] == '-')
-	{
-		while (tmp_oldpwd && (ft_strcmp(tmp_oldpwd->name, "OLDPWD") != 0))
-			tmp_oldpwd = tmp_oldpwd->nxt;
-		if (tmp_oldpwd && tmp_oldpwd->var[0])
-			chdir(tmp_oldpwd->var[0]);
-	}
-	else
-	{
-		tmp_pwd = *env;
-		chdir(line[1]);
+		ft_print_err(line, 1); //a changer par un define CD_NOT_FOUND
+		return (3);
 	}
 	getcwd(buf, PATH_MAX);
-	printf("CC DEBUG2\n");
 	while (tmp_pwd && (ft_strcmp(tmp_pwd->name, "PWD") != 0))
 		tmp_pwd = tmp_pwd->nxt;
 	while (tmp_oldpwd && (ft_strcmp(tmp_oldpwd->name, "OLDPWD") != 0))

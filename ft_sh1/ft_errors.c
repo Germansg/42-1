@@ -17,7 +17,7 @@ void	ft_prompt(void)
 	char	buf[PATH_MAX];
 
 	getcwd(buf, PATH_MAX);
-	ft_putstr("\x1b[32m");
+	ft_putstr("\x1b[32m~> ");
 	ft_putstr(buf);
 	ft_putstr(" $>\x1b[0m");
 	ft_putstr("");
@@ -31,5 +31,11 @@ void	ft_print_err(char **line, int n)
 		ft_putstr(line[0]);
 		ft_putchar(':');
 		ft_putendl(" command not found.");
+	}
+	if (n == 1)
+	{
+		ft_putstr("ft_sh1: ");
+		ft_putstr(line[1]);
+		ft_putendl(": no such directory or not available.");
 	}
 }

@@ -47,6 +47,8 @@ int		ft_replace_env(char **line, t_env **env)
 
 	tmp = *env;
 	tmp_name = ft_strsplit(line[1], '=');
+	if (!line[1])
+		return (1);
 	while (tmp)
 	{
 		if (tmp && tmp->name && tmp->var)
@@ -109,6 +111,8 @@ int		ft_del_env(char **line, t_env **env)
 				}
 				else
 					ft_del_node(tmp, tmp2);
+				tmp2 = NULL;
+				tmp = *env;
 				break ;
 			}
 			i++;

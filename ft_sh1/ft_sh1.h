@@ -31,6 +31,7 @@
 
 
 # define CMD_NOT_FOUND 0
+# define  CD_NOT_FOUND 1
 
 typedef	struct	s_env{
 
@@ -93,6 +94,7 @@ char	**ft_list_to_array(t_env **env);
 ** ft_utilities2.c
 */
 
+int		ft_movedir(char **line, t_env **env);
 int		ft_find_node(t_env **env, char *str);
 
 #endif
