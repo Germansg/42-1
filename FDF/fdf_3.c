@@ -20,7 +20,7 @@ int		ft_init_mlx(t_env *e)
 	e->r = 100;
 	e->g = 100;
 	e->b = 100;
-	e->zoom = 10;
+	e->zoom = 30;
 	e->z_ch = 1;
 	return (0);
 }

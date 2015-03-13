@@ -91,7 +91,6 @@ void	ft_parse(char *argv, t_env *e)
 
 int		keyrelease(int keycode, t_env *e)
 {
-	printf("%d\n", keycode);
 	if (keycode == 65307)
 		exit(0);
 	if (keycode == 98 && e->r + 10 < 255)

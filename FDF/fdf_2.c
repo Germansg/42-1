@@ -87,10 +87,6 @@ void	ft_create_image(t_env *e, int n)
 	}
 	if (n == 2)
 	{
-		// mlx_string_put (e->mlx, e->window, 1, 15, 0x66FF66, "Login: sboudouk");
-		// mlx_string_put (e->mlx, e->window, 1, 30, 0x66FF66, "Project: FDF");
-		// mlx_string_put (e->mlx, e->window, 1, 45, 0x66FF66,
-		// "Key usage: '*' '/' '+' '-' 'R G B' 'C' & Arrow keys");
 		mlx_put_image_to_window(e->mlx, e->window, e->img_ptr, 0, 0);
 		mlx_destroy_image(e->mlx, e->img_ptr);
 	}
@@ -121,9 +117,5 @@ void	ft_draw(t_env *e)
 		x = 0;
 		y++;
 	}
-		mlx_string_put (e->mlx, e->window, 1, 15, 0x66FF66, "Login: sboudouk");
-		mlx_string_put (e->mlx, e->window, 1, 30, 0x66FF66, "Project: FDF");
-		mlx_string_put (e->mlx, e->window, 1, 45, 0x66FF66,\
-		"Key usage: '*' '/' '+' '-' 'R G B' 'C' & Arrow keys");
 	ft_create_image(e, 2);
 }
