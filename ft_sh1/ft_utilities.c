@@ -22,8 +22,6 @@ int		ft_brutexec(char **line, t_env **env)
 	char	**tab_env;
 	pid_t	pid;
 
-	printf("SLT C BRUTEXEC\n");
-	tab_env = NULL;
 	if ((access(line[0], F_OK) == 0) && (access(line[0], X_OK) == 0))
 		pid = fork();
 	else
@@ -37,7 +35,7 @@ int		ft_brutexec(char **line, t_env **env)
 		{
 			execve(line[0], line, tab_env);
 			ft_exit(1);
-		}	
+		}
 		if (access(line[0], X_OK) == 0)
 		{
 			execve(line[0], line, tab_env);
@@ -49,22 +47,22 @@ int		ft_brutexec(char **line, t_env **env)
 }
 
 void	ft_create_env(t_env **llist)
-{	
-	t_env 	*home;
-	t_env 	*pwd;
+{
+	t_env	*home;
+	t_env	*pwd;
 	char	buf[PATH_MAX];
 
 	getcwd(buf, PATH_MAX);
-	home = malloc(sizeof(home));
+	home = (t_env *)malloc(sizeof(t_env));
 	home->name = ft_strdup("HOME");
-	home->var = ft_strsplit(buf, ' ');
+	home->var = ft_strsplit(buf, ':');
 	*llist = home;
-	pwd = malloc(sizeof(pwd));
+	pwd = (t_env*)malloc(sizeof(t_env));
 	pwd->name = ft_strdup("PWD");
-	pwd->var = ft_strsplit(buf, ' ');
+	pwd->var = ft_strsplit(buf, ':');
 	pwd->nxt = NULL;
 	home->nxt = pwd;
-}	
+}
 
 void	ft_lstpushback(t_env **llist, t_env *node)
 {

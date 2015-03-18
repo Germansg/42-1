@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//gerer sans env 50%
-//gerer toutes les errs X
-//gerer les signaux X
+/*
+** Quand je supprime deux node a la suite , SEGV X
+*/
 
 #include "ft_sh1.h"
 
@@ -65,7 +65,7 @@ void	ft_firstclean(char *line, t_env **e)
 
 void	ft_cleanline(char *line, t_env **e)
 {
-	char 	**ret;
+	char	**ret;
 	int		i;
 
 	i = 0;
@@ -104,6 +104,8 @@ int		main(int ac, char **av, char **env)
 	t_env *e;
 
 	e = NULL;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	if (ac || av)
 		while (42)
 			e = ft_sh1(env, e);

@@ -30,12 +30,17 @@ void	ft_print_err(char **line, int n)
 		ft_putstr("ft_sh1: ");
 		ft_putstr(line[0]);
 		ft_putchar(':');
-		ft_putendl(" command not found.");
+		ft_putendl(" command not found or inexisting file/folder.");
 	}
-	if (n == 1)
+	if (n == CD_NOT_FOUND)
 	{
 		ft_putstr("ft_sh1: ");
 		ft_putstr(line[1]);
 		ft_putendl(": no such directory or not available.");
+	}
+	if (n == SETENV_INVALID_USAGE)
+	{
+		ft_putstr("ft_sh1: setenv: ");
+		ft_putendl("Invalid usage (more than one '=', or arguments != 2)");
 	}
 }

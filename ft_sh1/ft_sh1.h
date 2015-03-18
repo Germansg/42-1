@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef FT_SH_H
-# define FT_SH_H
+#ifndef FT_SH1_H
+# define FT_SH1_H
 
 # include "libft/includes/libft.h"
 # include <grp.h>
@@ -28,16 +27,17 @@
 # include <errno.h>
 # include <string.h>
 # include <limits.h>
+# include <signal.h>
 
+# define CMD_NOT_FOUND			1
+# define CD_NOT_FOUND 			2
+# define SETENV_INVALID_USAGE	3
 
-# define CMD_NOT_FOUND 0
-# define  CD_NOT_FOUND 1
-
-typedef	struct	s_env{
-
-	char *name;
-	char **var;
-	struct s_env *nxt;
+typedef	struct	s_env
+{
+	char			*name;
+	char			**var;
+	struct s_env	*nxt;
 }				t_env;
 
 /*
@@ -63,8 +63,8 @@ int		ft_executebin(char **line, char *path, t_env **env);
 
 int		ft_print_env(t_env **env);
 int		ft_add_env(char **line, t_env **env);
-int		ft_del_env(char **line, t_env **env);
-void	ft_del_node(t_env *to_del, t_env *prev);
+int		ft_del_env(char *line, t_env **env);
+void	ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line);
 int		ft_replace_env(char **line, t_env **env);
 
 /*
@@ -91,10 +91,11 @@ int		ft_listlength(t_env *env);
 char	**ft_list_to_array(t_env **env);
 
 /*
-** ft_utilities2.c
+** ft_util2.c
 */
 
 int		ft_movedir(char **line, t_env **env);
 int		ft_find_node(t_env **env, char *str);
+int		ft_charocc(char *line, char c);
 
 #endif

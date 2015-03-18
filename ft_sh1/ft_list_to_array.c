@@ -40,7 +40,6 @@ char	**ft_list_to_array(t_env **env)
 	j = 0;
 	tab = (char**)malloc(sizeof(char *) * (ft_listlength(*env)) + 1);
 	tmp = *env;
-	var = NULL;
 	while (tmp)
 	{
 		name = ft_strjoin(tmp->name, "=");

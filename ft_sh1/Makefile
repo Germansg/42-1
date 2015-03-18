@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-SRC = ft_sh1.c ft_readentry.c ft_envmanage.c ft_utilities.c ft_sh1.h ft_list_to_array.c ft_errors.c ft_util2.c
+SRC = ft_sh1.h ft_sh1.c ft_readentry.c ft_envmanage.c ft_utilities.c ft_list_to_array.c ft_errors.c ft_util2.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -21,14 +21,14 @@ FLAGS = -Wall -Werror -Wextra -I libft/ -L libft/includes
 CC = gcc
 
 all: lib $(OBJ)
-	$(CC) $(FLAGS) $(SRC) libft/libft.a
+	$(CC) $(FLAGS) $(SRC) libft/libft.a -o $(NAME)
 
 $(NAME): all
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(FLAGS)
 
-re: relib fclean all
+re: lib all
 
 clean:
 	rm -f $(OBJ)
@@ -38,6 +38,3 @@ fclean: clean
 
 lib:
 	make -C libft
-
-relib:
-	make -C

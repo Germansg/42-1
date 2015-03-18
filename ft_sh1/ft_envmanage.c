@@ -42,7 +42,7 @@ int		ft_print_env(t_env **env)
 
 int		ft_replace_env(char **line, t_env **env)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	char	**tmp_name;
 
 	tmp = *env;
@@ -55,7 +55,7 @@ int		ft_replace_env(char **line, t_env **env)
 			if (ft_strcmp(tmp_name[0], tmp->name) == 0)
 			{
 				tmp->var[0] = ft_strdup(tmp_name[1]);
-				return(1);
+				return (1);
 			}
 		tmp = tmp->nxt;
 	}
@@ -69,67 +69,65 @@ int		ft_add_env(char **line, t_env **env)
 	int		i;
 
 	i = 1;
-	if (ft_replace_env(line, env) == 0)
+	if (!line[2] && line[1] && ft_charocc(line[1], '=') == 1)
 	{
-		while (line[i])
-		{
-			if (ft_strchr(line[i], '='))
+		if (ft_replace_env(line, env) == 0)
+			while (line[i])
 			{
-				tmp = (t_env*)malloc(sizeof(tmp));
-				sline = ft_strsplit(line[i], '=');
-				tmp->name = ft_strdup(sline[0]);
-				tmp->var = ft_strsplit(sline[1], ':');
-				tmp->nxt = NULL;
-				ft_lstpushback(env, tmp);
+				if (ft_strchr(line[i], '='))
+				{
+					tmp = (t_env*)malloc(sizeof(tmp));
+					sline = ft_strsplit(line[i], '=');
+					tmp->name = ft_strdup(sline[0]);
+					tmp->var = ft_strsplit(sline[1], ':');
+					tmp->nxt = NULL;
+					ft_lstpushback(env, tmp);
+				}
+				i++;
 			}
-			i++;
-		}
 	}
-	return(2);
+	else
+		ft_print_err(line, SETENV_INVALID_USAGE);
+	return (2);
 }
 
-int		ft_del_env(char **line, t_env **env)
+int		ft_del_env(char *line, t_env **env)
 {
-	t_env   *tmp;
-	t_env 	*tmp2;
-	int		i;
+	t_env	*tmp;
+	t_env	*tmp2;
 
-	i = 1;
 	tmp2 = NULL;
 	tmp = *env;
 	while (tmp)
 	{
-		while (line[i])
-		{
-			if (ft_strcmp(tmp->name, line[i]) == 0)
-			{
-				if (!tmp2)
-				{
-					tmp2 = (*env);
-					(*env) = (*env)->nxt;
-					free(tmp2);
-				}
-				else
-					ft_del_node(tmp, tmp2);
-				tmp2 = NULL;
-				tmp = *env;
-				break ;
-			}
-			i++;
-		}
-		i = 1;
+		ft_del_node(env, tmp, tmp2, line);
 		tmp2 = tmp;
 		tmp = tmp->nxt;
 	}
 	return (3);
 }
 
-void	ft_del_node(t_env *to_del, t_env *prev)
+void	ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
 {
 	t_env *tmp;
 
 	tmp = to_del;
-	if (prev)
-		prev->nxt = tmp->nxt;
-	free(to_del);
+	if (ft_strcmp(to_del->name, line) == 0)
+	{
+		if (!prev)
+		{
+			prev = (*env);
+			(*env) = (*env)->nxt;
+			free(prev);
+		}
+		else
+		{
+			if (prev)
+				prev->nxt = tmp->nxt;
+			free(to_del);
+		}
+		prev = NULL;
+		to_del = *env;
+	}
+	return ;
 }
