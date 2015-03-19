@@ -12,7 +12,7 @@
 
 #include "ft_sh1.h"
 
-int		ft_readentry(char **line, t_env **env)
+int				ft_readentry(char **line, t_env **env)
 {
 	if (ft_isbuiltin(line, env) == 0)
 		if (ft_isbinary(line, env) == 0)
@@ -21,7 +21,7 @@ int		ft_readentry(char **line, t_env **env)
 	return (0);
 }
 
-char	**ft_found_path(t_env **env)
+char			**ft_found_path(t_env **env)
 {
 	t_env	*tmp;
 
@@ -38,7 +38,7 @@ char	**ft_found_path(t_env **env)
 		return (tmp->var);
 }
 
-int		ft_isbinary(char **line, t_env **env)
+int				ft_isbinary(char **line, t_env **env)
 {
 	char	*bin;
 	char	*joined;
@@ -67,7 +67,7 @@ int		ft_isbinary(char **line, t_env **env)
 	return (0);
 }
 
-int		ft_movedir(char **line, t_env **env)
+static int		ft_movedir(char **line, t_env **env)
 {
 	t_env	*tmp_pwd;
 	t_env	*tmp_oldpwd;
@@ -96,7 +96,7 @@ int		ft_movedir(char **line, t_env **env)
 	return (-1);
 }
 
-int		ft_cd(char **line, t_env **env)
+int				ft_cd(char **line, t_env **env)
 {
 	char	buf[PATH_MAX];
 	t_env	*tmp_pwd;

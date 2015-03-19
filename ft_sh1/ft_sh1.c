@@ -16,7 +16,7 @@
 
 #include "ft_sh1.h"
 
-void	ft_fill_list(t_env **llist, char **env)
+static void	ft_fill_list(t_env **llist, char **env)
 {
 	t_env	*node;
 	t_env	*l_tmp;
@@ -45,7 +45,7 @@ void	ft_fill_list(t_env **llist, char **env)
 	l_tmp->nxt = NULL;
 }
 
-void	ft_firstclean(char *line, t_env **e)
+void		ft_firstclean(char *line, t_env **e)
 {
 	char	**tab;
 	int		i;
@@ -63,7 +63,7 @@ void	ft_firstclean(char *line, t_env **e)
 		free(tab);
 }
 
-void	ft_cleanline(char *line, t_env **e)
+void		ft_cleanline(char *line, t_env **e)
 {
 	char	**ret;
 	int		i;
@@ -80,7 +80,7 @@ void	ft_cleanline(char *line, t_env **e)
 	ft_readentry(ret, e);
 }
 
-t_env	*ft_sh1(char **env, t_env *e)
+t_env		*ft_sh1(char **env, t_env *e)
 {
 	char	*line;
 	t_env	*l_env;
@@ -99,13 +99,14 @@ t_env	*ft_sh1(char **env, t_env *e)
 	return (l_env);
 }
 
-int		main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
 	t_env *e;
 
 	e = NULL;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
+	printshell();
 	if (ac || av)
 		while (42)
 			e = ft_sh1(env, e);

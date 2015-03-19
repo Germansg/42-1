@@ -12,6 +12,17 @@
 
 #include "ft_sh1.h"
 
+void	printshell(void)
+{
+	ft_putendl("		#        #####      #####  #     #");
+	ft_putendl("		#    #  #     #    #     # #     #");
+	ft_putendl("		#    #        #    #       #     #");
+	ft_putendl("		#    #   #####      #####  #######");
+	ft_putendl("		####### #                # #     #");
+	ft_putendl("		     #  #          #     # #     #");
+	ft_putendl("		     #  #######     #####  #     # ");
+}
+
 int		ft_executebin(char **line, char *path, t_env **env)
 {
 	char	**tab_env;

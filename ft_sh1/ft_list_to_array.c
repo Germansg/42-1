@@ -12,7 +12,7 @@
 
 #include "ft_sh1.h"
 
-int		ft_listlength(t_env *env)
+static int	ft_listlength(t_env *env)
 {
 	t_env	*tmp;
 	int		i;
@@ -27,37 +27,46 @@ int		ft_listlength(t_env *env)
 	return (i);
 }
 
-char	**ft_list_to_array(t_env **env)
+static char	*ft_copyenv(char *name, char **tab)
 {
-	t_env	*tmp;
-	char	*name;
+	char	*ret;
+	char	*nom;
 	char	*var;
-	char	**tab;
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
+	nom = ft_strjoin(name, "=");
+	while (tab[j])
+	{
+		if (j == 0)
+			var = ft_strdup(tab[j]);
+		else
+		{
+			var = ft_strjoin(var, ":");
+			var = ft_strjoin(var, tab[j]);
+		}
+		j++;
+	}
+	ret = ft_strjoin(nom, var);
+	ft_strdel(&name);
+	ft_strdel(&var);
+	if (ret)
+		return (ret);
+	return (NULL);
+}
+
+char		**ft_list_to_array(t_env **env)
+{
+	t_env	*tmp;
+	char	**tab;
+	int		i;
+
+	i = 0;
 	tab = (char**)malloc(sizeof(char *) * (ft_listlength(*env)) + 1);
 	tmp = *env;
 	while (tmp)
 	{
-		name = ft_strjoin(tmp->name, "=");
-		while (tmp->var[j])
-		{
-			if (j == 0)
-				var = ft_strdup(tmp->var[j]);
-			else
-			{
-				var = ft_strjoin(var, ":");
-				var = ft_strjoin(var, tmp->var[j]);
-			}
-			j++;
-		}
-		j = 0;
-		tab[i] = ft_strjoin(name, var);
-		ft_strdel(&name);
-		ft_strdel(&var);
+		tab[i] = ft_copyenv(tmp->name, tmp->var);
 		i++;
 		tmp = tmp->nxt;
 	}

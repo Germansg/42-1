@@ -12,7 +12,7 @@
 
 #include "ft_sh1.h"
 
-int		ft_print_env(t_env **env)
+int				ft_print_env(t_env **env)
 {
 	t_env	*tmp;
 	int		i;
@@ -40,7 +40,7 @@ int		ft_print_env(t_env **env)
 	return (1);
 }
 
-int		ft_replace_env(char **line, t_env **env)
+static int		ft_replace_env(char **line, t_env **env)
 {
 	t_env	*tmp;
 	char	**tmp_name;
@@ -62,7 +62,7 @@ int		ft_replace_env(char **line, t_env **env)
 	return (0);
 }
 
-int		ft_add_env(char **line, t_env **env)
+int				ft_add_env(char **line, t_env **env)
 {
 	t_env	*tmp;
 	char	**sline;
@@ -91,23 +91,7 @@ int		ft_add_env(char **line, t_env **env)
 	return (2);
 }
 
-int		ft_del_env(char *line, t_env **env)
-{
-	t_env	*tmp;
-	t_env	*tmp2;
-
-	tmp2 = NULL;
-	tmp = *env;
-	while (tmp)
-	{
-		ft_del_node(env, tmp, tmp2, line);
-		tmp2 = tmp;
-		tmp = tmp->nxt;
-	}
-	return (3);
-}
-
-void	ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
+static void		ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
 {
 	t_env *tmp;
 
@@ -130,4 +114,20 @@ void	ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
 		to_del = *env;
 	}
 	return ;
+}
+
+int				ft_del_env(char *line, t_env **env)
+{
+	t_env	*tmp;
+	t_env	*tmp2;
+
+	tmp2 = NULL;
+	tmp = *env;
+	while (tmp)
+	{
+		ft_del_node(env, tmp, tmp2, line);
+		tmp2 = tmp;
+		tmp = tmp->nxt;
+	}
+	return (3);
 }

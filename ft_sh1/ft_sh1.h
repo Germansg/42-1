@@ -41,61 +41,58 @@ typedef	struct	s_env
 }				t_env;
 
 /*
-** ft_sh1.c
+** ft_sh1.c + 1 static, main & ft_sh1.
 */
 
-void	ft_firstclean(char *line, t_env **e);
-void	ft_cleanline(char *line, t_env **e);
+void			ft_firstclean(char *line, t_env **e);
+void			ft_cleanline(char *line, t_env **e);
 
 /*
-** ft_readentry.c
+** ft_readentry.c + 1 static.
 */
 
-int		ft_readentry(char **line, t_env **l_env);
-int		ft_cd(char **line, t_env **env);
-int		ft_isbuiltin(char **line, t_env **env);
-int		ft_isbinary(char **line, t_env **env);
-int		ft_executebin(char **line, char *path, t_env **env);
+int				ft_readentry(char **line, t_env **l_env);
+int				ft_cd(char **line, t_env **env);
+int				ft_isbuiltin(char **line, t_env **env);
+int				ft_isbinary(char **line, t_env **env);
 
 /*
-** ft_envmanage.c
+** ft_envmanage.c + 2 static.
 */
 
-int		ft_print_env(t_env **env);
-int		ft_add_env(char **line, t_env **env);
-int		ft_del_env(char *line, t_env **env);
-void	ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line);
-int		ft_replace_env(char **line, t_env **env);
+int				ft_print_env(t_env **env);
+int				ft_add_env(char **line, t_env **env);
+int				ft_del_env(char *line, t_env **env);
 
 /*
 ** ft_errors.c
 */
 
-void	ft_print_err(char **line, int n);
-void	ft_prompt(void);
+void			ft_print_err(char **line, int n);
+void			ft_prompt(void);
 
 /*
 ** ft_utilities.c
 */
 
-void	ft_lstpushback(t_env **llist, t_env *node);
-int		ft_brutexec(char **line, t_env **env);
-void	ft_create_env(t_env **llist);
-void	ft_exit(int n);
+void			ft_lstpushback(t_env **llist, t_env *node);
+int				ft_brutexec(char **line, t_env **env);
+void			ft_create_env(t_env **llist);
+void			ft_exit(int n);
 
 /*
-** ft_list_to_array.c
+** ft_list_to_array.c + 2 static.
 */
 
-int		ft_listlength(t_env *env);
-char	**ft_list_to_array(t_env **env);
+char			**ft_list_to_array(t_env **env);
 
 /*
 ** ft_util2.c
 */
 
-int		ft_movedir(char **line, t_env **env);
-int		ft_find_node(t_env **env, char *str);
-int		ft_charocc(char *line, char c);
+int				ft_executebin(char **line, char *path, t_env **env);
+void			printshell(void);
+int				ft_find_node(t_env **env, char *str);
+int				ft_charocc(char *line, char c);
 
 #endif
