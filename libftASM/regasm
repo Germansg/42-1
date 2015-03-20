@@ -1,0 +1,21 @@
+
+Registres = 
+
+rax: valeur de retour.
+
+Exemple =
+
+rax = 0
+ret
+
+ret arrete la fonction et renverras la valeur de rax
+
+Parametres =
+
+Une fonction peux avoir jusqu'a 4 parametres
+
+1 rdi =
+2 rsi = 
+3 rdx = 
+4 rcx =
+
