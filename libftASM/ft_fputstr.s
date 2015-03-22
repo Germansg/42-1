@@ -4,7 +4,7 @@
 %define STDOUT 0x1
 
 
-global _ft_puts
+global _ft_fputstr
 extern _ft_strlen
 
 section .data
@@ -13,31 +13,24 @@ null:
 	
 section .text
 
-_ft_puts:
+_ft_fputstr:
 	cmp rdi, 0x0
 	je _null
 	push rdi
 	call _ft_strlen
 	mov	rdx, rax
+	mov rdi, rsi
 	pop rsi
-	mov rdi, STDOUT
 	mov rax, CALL(WRITE)
 	syscall
-	jmp _putnl
+	mov rax, 0xa
+	ret
 
 _null:
-	mov rdi, STDOUT
+	mov rdi, rsi
 	lea rsi, [rel null.string]
 	mov rdx, 6
 	mov rax, CALL(WRITE)
 	syscall
-
-_putnl:
-	push 0xa
-	mov rsi, rsp 
-	mov rdi, STDOUT
-	mov rdx, 1
-	mov rax, CALL(WRITE)
-	syscall
-	pop	rax
+	mov rax, 0xa
 	ret

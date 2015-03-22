@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <string.h>
-#include "libftasm.h"
+#include "libfts.h"
 
 void test_isalpha(void)
 {
@@ -171,73 +169,9 @@ void test_memcpy(void)
 
 void test_puts(void)
 {
-	printf("\n\n ==========[ft_(f)puts(tr)]==========\n");
+	printf("\n\n ==========[ft_puts]==========\n");
 	ft_puts("Salur");
 	ft_puts(NULL);
-	ft_fputs("Salur", 2);
-	ft_fputs(NULL, 2);
-	ft_putstr("Salur\n");
-	ft_putstr(NULL);
-	ft_putstr("\n");
-	ft_fputstr("Salur\n", 2);
-	ft_fputstr(NULL, 2);
-	ft_fputstr("\n", 2);
-}
-
-void test_strdup(void)
-{
-	char *s1;
-
-	printf("\n\n ==========[ft_strdup]==========\n");
-	s1 = ft_strdup("Ca ");
-	printf("%s", s1);
-	s1 = ft_strdup("fonctionne !\n");
-	printf("%s", s1);
-}
-
-void test_cat(void)
-{
-	char buff[1024 + 1];
-	int i;
-	int fd;
-
-	printf("\n\n ==========[ft_cat]==========\n");
-	printf("Type '0' if you want to run cat on STDIN. Else type the file you want to cat.\n");
-	if ((i = read(0, buff, 1024)))
-	{
-		buff[i - 1] = '\0';
-		if (strcmp(buff, "0") == 0)
-			ft_cat(0);
-		else
-		{
-			fd = open(buff, O_RDONLY);
-			ft_cat(fd);
-		}
-	}
-}
-
-void test_isspace(void)
-{
-	char *s1;
-
-	printf("\n\n ==========[ft_isspace]==========\n");
-	printf("   ft_isspace(sp) = %d\n", ft_isspace(32));
-	printf("   ft_isspace(ht) = %d\n", ft_isspace(9));
-	printf("   ft_isspace(cr) = %d\n", ft_isspace(13));
-	printf("   ft_isspace('a') = %d\n", ft_isspace(65));
-}
-
-void test_strcmp(void)
-{
-	char s1[] = "SALUR";
-	char s2[] = "SALU";
-	char s3[] = "SALUR";
-	char s4[] = "";
-
-	printf("\n\n ==========[ft_strcmp]==========\n");
-	printf("%d = %d ?\n", ft_strcmp(s1, s2), strcmp(s1, s2));
-	printf("%d = %d ?\n", ft_strcmp(s1, s3), strcmp(s1, s3));
-	printf("%d = %d ?\n", ft_strcmp(s1, s4), strcmp(s1, s4));
 }
 
 int main()
@@ -254,9 +188,4 @@ int main()
 	test_strlen();
 	test_memset();
 	test_memcpy();
-	test_puts();
-	test_strdup();
-	test_strcmp();
-	test_cat();
-	test_isspace();
 }

@@ -16,18 +16,10 @@ SFILES = 	ft_isalnum.s \
 			ft_strlen.s \
 			ft_memset.s \
 			ft_memcpy.s \
-			ft_puts.s \
-			ft_cat.s \
-			ft_strdup.s \
-			ft_isspace.s \
-			ft_strcmp.s \
-			ft_fputs.s \
-			ft_fputstr.s \
-			ft_putstr.s
 
 OBJ = $(SFILES:.s=.o)
 
-$(NAME): $(LIB) $(OBJ) libftasm.h
+$(NAME): $(LIB) $(OBJ) libfts.h
 
 all: $(LIB) $(OBJ) $(NAME)
 

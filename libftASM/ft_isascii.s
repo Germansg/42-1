@@ -3,9 +3,9 @@ section .text
 global _ft_isascii
 
 _ft_isascii:
-	cmp rdi, 000
+	cmp rdi, 0
 	jl _not
-	cmp rdi, 177
+	cmp rdi, 127
 	jg	_not
 	jmp _is
 

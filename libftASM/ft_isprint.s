@@ -3,9 +3,9 @@ section .text
 global _ft_isprint
 
 _ft_isprint:
-	cmp rdi, 040
+	cmp rdi, 32
 	jl _not
-	cmp rdi, 176
+	cmp rdi, 126
 	jg	_not
 	jmp _is
 
