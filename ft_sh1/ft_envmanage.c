@@ -47,6 +47,11 @@ static int		ft_replace_env(char **line, t_env **env)
 
 	tmp = *env;
 	tmp_name = ft_strsplit(line[1], '=');
+	if (ft_check_setenv_validity(line) == 1)
+	{
+		ft_print_err(line, SETENV_INVALID_USAGE);
+		return (1);
+	}
 	if (!line[1])
 		return (1);
 	while (tmp)
@@ -91,7 +96,7 @@ int				ft_add_env(char **line, t_env **env)
 	return (2);
 }
 
-static void		ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
+static int		ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
 {
 	t_env *tmp;
 
@@ -103,31 +108,37 @@ static void		ft_del_node(t_env **env, t_env *to_del, t_env *prev, char *line)
 			prev = (*env);
 			(*env) = (*env)->nxt;
 			free(prev);
+			return (1);
 		}
 		else
 		{
 			if (prev)
 				prev->nxt = tmp->nxt;
 			free(to_del);
+			return (1);
 		}
 		prev = NULL;
 		to_del = *env;
 	}
-	return ;
+	return (0);
 }
 
 int				ft_del_env(char *line, t_env **env)
 {
 	t_env	*tmp;
 	t_env	*tmp2;
+	int		i;
 
+	i = 0;
 	tmp2 = NULL;
 	tmp = *env;
 	while (tmp)
 	{
-		ft_del_node(env, tmp, tmp2, line);
+		i += ft_del_node(env, tmp, tmp2, line);
 		tmp2 = tmp;
 		tmp = tmp->nxt;
 	}
+	if (i == 0)
+		ft_print_err(&line, ENV_NOT_FOUND);
 	return (3);
 }

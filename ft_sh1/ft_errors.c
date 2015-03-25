@@ -15,10 +15,14 @@
 void	ft_prompt(void)
 {
 	char	buf[PATH_MAX];
+	char	*prompt;
 
 	getcwd(buf, PATH_MAX);
 	ft_putstr("\x1b[32m~> ");
-	ft_putstr(buf);
+	prompt = ft_strrchr(buf, '/');
+	ft_putstr("[");
+	ft_putstr(prompt);
+	ft_putstr("]");
 	ft_putstr(" $>\x1b[0m");
 	ft_putstr("");
 }
@@ -27,20 +31,26 @@ void	ft_print_err(char **line, int n)
 {
 	if (n == CMD_NOT_FOUND)
 	{
-		ft_putstr("ft_sh1: ");
-		ft_putstr(line[0]);
-		ft_putchar(':');
-		ft_putendl(" command not found or inexisting file/folder.");
+		ft_putstr_fd("ft_sh1: ", 2);
+		if (line[0])
+			ft_putstr_fd(line[0], 2);
+		ft_putchar_fd(':', 2);
+		ft_putendl_fd(" command not found: no such file/folder,or no rights",\
+		2);
 	}
 	if (n == CD_NOT_FOUND)
 	{
-		ft_putstr("ft_sh1: ");
-		ft_putstr(line[1]);
-		ft_putendl(": no such directory or not available.");
+		ft_putstr_fd("ft_sh1: ", 2);
+		if (line[1])
+			ft_putstr_fd(line[1], 2);
+		ft_putendl_fd(": no such directory or not available.", 2);
 	}
 	if (n == SETENV_INVALID_USAGE)
+		ft_putendl_fd("ft_sh1: setenv: Bad usage: example ('setenv a=b')", 2);
+	if (n == ENV_NOT_FOUND)
 	{
-		ft_putstr("ft_sh1: setenv: ");
-		ft_putendl("Invalid usage (more than one '=', or arguments != 2)");
+		ft_putstr_fd("ft_sh1: unsetenv: Bad usage: example 'unsetenv VARNAME'",
+		2);
+		ft_putendl_fd(" or VARNAME not found on environement.", 2);
 	}
 }

@@ -32,6 +32,7 @@
 # define CMD_NOT_FOUND			1
 # define CD_NOT_FOUND 			2
 # define SETENV_INVALID_USAGE	3
+# define ENV_NOT_FOUND			4
 
 typedef	struct	s_env
 {
@@ -79,6 +80,7 @@ void			ft_lstpushback(t_env **llist, t_env *node);
 int				ft_brutexec(char **line, t_env **env);
 void			ft_create_env(t_env **llist);
 void			ft_exit(int n);
+int				ft_check_setenv_validity(char **line);
 
 /*
 ** ft_list_to_array.c + 2 static.

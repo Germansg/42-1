@@ -6,14 +6,14 @@
 #    By: sboudouk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/10 16:36:53 by sboudouk          #+#    #+#              #
-#    Updated: 2014/12/15 16:36:32 by sboudouk         ###   ########.fr        #
+#    Updated: 2015/03/23 17:34:53 by sboudouk         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
 CC = gcc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -L includes/
+CFLAGS = -Wall -Werror -Wextra
 DIRSRC = ./
 INCLUDES = ./includes/
 OBJ = $(SRC:.c=.o)

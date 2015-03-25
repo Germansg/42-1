@@ -40,7 +40,7 @@ int		ft_executebin(char **line, char *path, t_env **env)
 		tab_env = ft_list_to_array(env);
 		if (execve(path, line, tab_env) != 0)
 		{
-			ft_exit (1);
+			ft_exit(1);
 		}
 	}
 	return (0);

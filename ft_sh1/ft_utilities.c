@@ -17,6 +17,21 @@ void	ft_exit(int n)
 	exit(n);
 }
 
+int		ft_check_setenv_validity(char **line)
+{
+	int		i;
+
+	i = 0;
+	while (line[1][i])
+	{
+		if (line[1][i] == '=')
+			if (line[1][i + 1] == '\0')
+				return (1);
+		i++;
+	}
+	return (0);
+}
+
 int		ft_brutexec(char **line, t_env **env)
 {
 	char	**tab_env;
@@ -31,17 +46,12 @@ int		ft_brutexec(char **line, t_env **env)
 	else if (pid == 0)
 	{
 		tab_env = ft_list_to_array(env);
-		if (ft_find_node(env, "PATH") == 0)
+		if (ft_find_node(env, "PATH") == 0 || access(line[0], X_OK) == 0)
 		{
-			execve(line[0], line, tab_env);
+			if (execve(line[0], line, tab_env) == -1)
+				ft_print_err(line, CMD_NOT_FOUND);
 			ft_exit(1);
 		}
-		if (access(line[0], X_OK) == 0)
-		{
-			execve(line[0], line, tab_env);
-			ft_exit(1);
-		}
-		return (0);
 	}
 	return (1);
 }

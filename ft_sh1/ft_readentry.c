@@ -74,7 +74,7 @@ static int		ft_movedir(char **line, t_env **env)
 
 	tmp_pwd = *env;
 	tmp_oldpwd = *env;
-	if (line[1] == NULL || line[1][0] == '~')
+	if (line[1] == NULL || ft_strcmp(line[1], "~") == 0)
 	{
 		while (tmp_pwd && (ft_strcmp(tmp_pwd->name, "HOME") != 0))
 			tmp_pwd = tmp_pwd->nxt;
