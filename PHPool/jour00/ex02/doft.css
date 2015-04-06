@@ -160,6 +160,8 @@
 	background-image: url("resources/brick.jpg");
 }
 
+/* Green Box */
+
 .first_paragraph
 {
 	margin-left: 15px;
@@ -167,4 +169,39 @@
 	font-size: 21px;
 	letter-spacing: 2px;
 	font-family: Arial, serif;
+}
+
+.second_paragraph
+{
+	margin-left: 15px;
+	font-size: 21px;
+	letter-spacing: 1px;
+	font-family: Arial, serif;
+	font-style: italic;
+}
+
+.text_1
+{
+	font-size: 37px;
+}
+
+.text_2
+{
+	text-shadow: 8px 8px 6px #d00;
+}
+
+.text_wow
+{
+	border: 3px inset;
+	width: 480px;
+	height: 25px;
+}
+
+.button
+{
+	margin-left: 5px;
+	width: 100px;
+	height: 25px;
+	font-size: 15px;
+	letter-spacing: 1px;
 }
