@@ -16,6 +16,7 @@ _ft_cat:
 	mov rdx, 0x200
 	mov rax, CALL(READ)
 	syscall
+	jc _end
 	cmp rax, 0
 	jle _end
 	push rdi

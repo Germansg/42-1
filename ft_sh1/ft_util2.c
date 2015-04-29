@@ -40,7 +40,7 @@ int		ft_executebin(char **line, char *path, t_env **env)
 		tab_env = ft_list_to_array(env);
 		if (execve(path, line, tab_env) != 0)
 		{
-			ft_exit(1);
+			ft_exit(-1);
 		}
 	}
 	return (0);
@@ -57,7 +57,7 @@ int		ft_isbuiltin(char **line, t_env **env)
 		ft_exit(3);
 	if (ft_strcmp(line[0], "cd") == 0)
 		return (ft_cd(line, env));
-	if (ft_strcmp(line[0], "env") == 0)
+	if ((ft_strcmp(line[0], "env") == 0) && !line[1])
 		return (ft_print_env(env));
 	if (ft_strncmp(line[0], "setenv", 6) == 0)
 		return (ft_add_env(line, env));

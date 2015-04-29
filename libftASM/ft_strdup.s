@@ -1,17 +1,18 @@
 global _ft_strdup
 
-extern _malloc, _ft_strlen, _ft_memcpy
+extern _malloc, _ft_strlen, _ft_memcpy, _ft_bzero, _ft_strcat
 
 section .text
 
 _ft_strdup:
 	push rdi
 	call _ft_strlen
-	push rax
 	mov rdi, rax
+	inc rdi
 	call _malloc
-	pop rdx
 	pop rsi
 	mov rdi, rax
-	call _ft_memcpy
+	push rdi
+	call _ft_strcat
+	pop rax
 	ret

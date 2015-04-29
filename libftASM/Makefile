@@ -27,7 +27,7 @@ SFILES = 	ft_isalnum.s \
 
 OBJ = $(SFILES:.s=.o)
 
-$(NAME): $(LIB) $(OBJ) libftasm.h
+$(NAME): $(LIB) $(OBJ) mains/libftasm.h
 
 all: $(LIB) $(OBJ) $(NAME)
 
@@ -46,5 +46,5 @@ clean:
 fclean: clean
 	rm -f $(LIB)
 
-test: main.c $(NAME)
-	gcc main.c $(LIB) -o $(TEST)
+test: mains/main.c $(NAME)
+	gcc -Wall -Werror -Wextra mains/main.c $(LIB) -o $(TEST)

@@ -211,14 +211,13 @@ void test_cat(void)
 		else
 		{
 			fd = open(buff, O_RDONLY);
-			ft_cat(fd);
+			ft_cat(42);
 		}
 	}
 }
 
 void test_isspace(void)
 {
-	char *s1;
 
 	printf("\n\n ==========[ft_isspace]==========\n");
 	printf("   ft_isspace(sp) = %d\n", ft_isspace(32));

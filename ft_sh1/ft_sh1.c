@@ -26,7 +26,7 @@ static void	ft_fill_list(t_env **llist, char **env)
 	i = 0;
 	while (env[i])
 	{
-		node = (t_env*)malloc(sizeof(node));
+		node = (t_env*)malloc(sizeof(t_env));
 		tmp = ft_strsplit(env[i], '=');
 		node->name = ft_strdup(tmp[0]);
 		node->var = ft_strsplit(tmp[1], ':');

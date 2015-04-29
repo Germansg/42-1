@@ -6,7 +6,7 @@
 #    By: sboudouk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/14 19:36:55 by sboudouk          #+#    #+#              #
-#    Updated: 2015/03/24 19:08:40 by sboudouk         ###   ########.fr        #
+#    Updated: 2015/03/25 15:29:47 by sboudouk         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,13 +21,13 @@ FLAGS = -Wall -Werror -Wextra
 CC = gcc
 
 
-all: $(NAME)
+all: lib $(NAME)
 
 $(NAME): $(OBJ)
-	@ $(CC) $(FLAGS) $(SRC) ft_sh1.h libft/libft.a
+	@ $(CC) $(FLAGS) $(OBJ) libft/libft.a -o ft_minishell1
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $<
 
 re: cleanlib lib all
 

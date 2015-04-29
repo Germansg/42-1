@@ -21,7 +21,7 @@ int				ft_print_env(t_env **env)
 	tmp = *env;
 	while (tmp != NULL)
 	{
-		if (tmp)
+		if (tmp && tmp->name)
 			ft_putstr(tmp->name);
 		if (tmp && !(ft_strchr(tmp->name, '=')))
 			ft_putchar('=');
@@ -81,7 +81,7 @@ int				ft_add_env(char **line, t_env **env)
 			{
 				if (ft_strchr(line[i], '='))
 				{
-					tmp = (t_env*)malloc(sizeof(tmp));
+					tmp = (t_env*)malloc(sizeof(t_env));
 					sline = ft_strsplit(line[i], '=');
 					tmp->name = ft_strdup(sline[0]);
 					tmp->var = ft_strsplit(sline[1], ':');

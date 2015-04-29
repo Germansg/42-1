@@ -66,7 +66,8 @@ char		**ft_list_to_array(t_env **env)
 	tmp = *env;
 	while (tmp)
 	{
-		tab[i] = ft_copyenv(tmp->name, tmp->var);
+		if (tmp->name && tmp->var && tmp->var[0])
+			tab[i] = ft_copyenv(tmp->name, tmp->var);
 		i++;
 		tmp = tmp->nxt;
 	}
