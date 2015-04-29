@@ -1,0 +1,12 @@
+<- Vertex ----------------------------------------------------------------------
+
+The Vertex class is the swagest class ever.
+
+You must have enough swag to use it.
+It Allow you to set X, Y, Z, and the W values for a voxel. (Volumetric Pixels).
+The W values is set ti "1". by default.
+
+The "Color" class is used in the "Vertex" class. To read the Color class doc
+call it with the "doc" value.
+
+---------------------------------------------------------------------- Vertex ->

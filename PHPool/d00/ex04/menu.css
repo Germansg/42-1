@@ -1,0 +1,39 @@
+#menu
+{
+	margin-left: 150px;
+	margin-top: 150px;
+	font-size: 36px;
+}
+
+ul
+{
+	list-style: none;
+}
+
+#menu a
+{
+	display: block;
+	padding: 3px 8px;
+	color: red;
+	text-decoration: none;
+}
+
+.menu_item:hover {
+text-shadow: 0 1px 0 #666,
+0 2px 0 #555,
+1px 3px 0 #444,
+2px 4px 0 #333,
+3px 5px 0 #222,
+4px 6px 1px #111,
+0 0 5px rgba(0,0,0,.6),
+0 1px 3px rgba(0,0,0,.5),
+1px 3px 5px rgba(0,0,0,.4),
+3px 5px 10px rgba(0,0,0,.3),
+5px 10px 10px rgba(0,0,0,.2),
+10px 20px 20px rgba(0,0,0,.1);
+}
+
+.menu_item {
+-webkit-transition: all 0.7s;
+transition: all 0.7s;
+}
