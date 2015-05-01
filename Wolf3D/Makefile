@@ -10,34 +10,35 @@
 #                                                                              #
 #******************************************************************************#
 
-SRC = wolf3d.c gnl/get_next_line.c
+SRC = wolf3d.c sdl_manage.c
 
 OBJ = $(SRC:.c=.o)
 
-NAME = Wolf3D
+NAME = wolf3d
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -I ./includes -I ./includes/SDL2 -I ./libft/includes/
 
 CC = gcc
 
-all: lib $(OBJ)
-    $(CC) $(FLAGS) $(SRC) libft/libft.a -o $(NAME)
 
-$(NAME): all
+all: lib $(NAME)
+
+$(NAME): $(OBJ)
+	@ $(CC) $(FLAGS) $(OBJ) libft/libft.a SDL/libSDL2-2.0.0.dylib -o wolf3d
 
 %.o: %.c
-    $(CC) -o $@ -c $< $(FLAGS)
+	$(CC) $(FLAGS) -c $<
 
-re: relib fclean all
+re: cleanlib lib all
 
 clean:
-    rm -f $(OBJ)
+	rm -f $(OBJ)
 
-fclean: clean
-    rm -f $(NAME)
+fclean: cleanlib clean
+	rm -f $(NAME)
 
 lib:
-    make -C libft
+	make -C libft
 
-relib:
-    make -C libft re
+cleanlib:
+	make fclean -C libft

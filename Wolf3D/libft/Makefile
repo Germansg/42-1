@@ -13,7 +13,7 @@
 NAME = libft.a
 CC = gcc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -L includes/
+CFLAGS = -Wall -Werror -Wextra
 DIRSRC = ./
 INCLUDES = ./includes/
 OBJ = $(SRC:.c=.o)
