@@ -20,6 +20,30 @@
 #include <fcntl.h>
 #include <SDL.h>
 
+typedef struct 		s_play{
+
+	double			camerax;
+	double			rayposx;
+	double			rayposy;
+	double			raydirx;
+	double			raydiry;
+	double			distmurx;
+	double			distmury;
+	double			dist2murx;
+	double			dist2mury;
+	double			longueurmur;
+	int				hauteurmur;
+	int				toucher;
+	int				verti_ou_horizon;
+	int				etapex;
+	int				etapey;
+	int				drawstart;
+	int				drawend;
+	int				mapx;
+	int				mapy;
+
+}					t_play;
+
 typedef struct 		s_keyboard{
 
 	int				pad_left;
@@ -62,8 +86,10 @@ typedef struct	s_env{
 
 /* sdl_manage.c */
 
+void	p_pxl(t_env *e, double cl, int x, int h);
 void	ft_key_is_pushed(t_env *env);
 int		ft_key_is_released(t_env *env);
 int		ft_win_ev(t_env *env);
+void	display_calculs(t_env *e, int i);
 
 #endif

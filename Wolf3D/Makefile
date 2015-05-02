@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-SRC = wolf3d.c sdl_manage.c
+SRC = wolf3d.c sdl_manage.c raycasting.c sdl_renderer.c
 
 OBJ = $(SRC:.c=.o)
 

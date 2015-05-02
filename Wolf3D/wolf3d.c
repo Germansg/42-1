@@ -58,8 +58,8 @@ void ft_sdl_init(t_env *e)
 	SDL_ShowCursor(SDL_DISABLE);
 	e->width = 800;
 	e->height = 600;
-	e->player.posx = 1.5;
-	e->player.posy = 1.5;
+	e->player.posx = 5.5;
+	e->player.posy = 5.5;
 	e->player.dirx = -1;
 	e->player.diry = 0;
 	e->player.planex = 0;
@@ -85,6 +85,8 @@ void	ft_main_loop(t_env *env)
 {
 	while (42)
 	{
+		display_calculs(env, 0);
+		SDL_RenderPresent(env->img);
 		if (ft_sdl_keyhook(env) == 1)
 			return ;
 	}
