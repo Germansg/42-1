@@ -14,13 +14,11 @@
 
 void	p_pxl(t_env *e, double cl, int x, int h)
 {
-
 	int	start;
 	int	i;
 
 	i = 0;
 	start = e->height / 2 - h / 2;
-	printf("%d\n", start);
 	SDL_SetRenderDrawColor(e->img, 50, 50, 200, 255);
 	while (i < start)
 	{

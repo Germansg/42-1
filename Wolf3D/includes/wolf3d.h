@@ -60,6 +60,10 @@ typedef struct 		s_keyboard{
 
 typedef	struct		s_player{
 
+	double	oldirx;
+	double	oldiry;
+	double	oldplanex;
+	double	oldplaney;
 	double	posx;				/* Position du joueur */
 	double	posy;
 	double	dirx;				/* Direction que prends le joueur */
@@ -77,6 +81,10 @@ typedef struct	s_env{
 	t_player		player;
 	double			time;
 	double			oldtime;
+	double			movespeed;
+	double			rotspeed;
+	double			a_time;
+	double			old_time;
 	int				**map;
 	t_keyboard		key;
 	int				width;
@@ -86,6 +94,7 @@ typedef struct	s_env{
 
 /* sdl_manage.c */
 
+void	handle_moves(t_env *e);
 void	p_pxl(t_env *e, double cl, int x, int h);
 void	ft_key_is_pushed(t_env *env);
 int		ft_key_is_released(t_env *env);

@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-SRC = wolf3d.c sdl_manage.c raycasting.c sdl_renderer.c
+SRC = wolf3d.c sdl_manage.c raycasting.c sdl_renderer.c handle_moves.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -19,7 +19,6 @@ NAME = wolf3d
 FLAGS = -Wall -Werror -Wextra -I ./includes -I ./includes/SDL2 -I ./libft/includes/
 
 CC = gcc
-
 
 all: lib $(NAME)
 
