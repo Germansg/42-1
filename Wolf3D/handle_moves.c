@@ -14,8 +14,8 @@
 
 void	handle_moves(t_env *e)
 {
-	e->movespeed = 1;
-	e->rotspeed = 0.5;
+	e->movespeed = 0.15;
+	e->rotspeed = 0.10;
 	
 	printf("forward = %d\n", e->key.forward);
 	printf("back = %d\n", e->key.back);
