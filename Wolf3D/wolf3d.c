@@ -45,13 +45,14 @@ int		**ft_create_map(void)
 		}
 		y++;
 	}
+	map[8][8] = 1;
 	return(map);
 }
 
 void ft_sdl_init(t_env *e)
 {
 	SDL_Init(SDL_INIT_VIDEO);
-	e->window = SDL_CreateWindow("Wold3D",
+	e->window = SDL_CreateWindow("Wolfd3D",
 	SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 	800, 600, SDL_WINDOW_RESIZABLE);
 	e->img = SDL_CreateRenderer(e->window, 1, SDL_RENDERER_ACCELERATED);
@@ -87,8 +88,8 @@ void	ft_main_loop(t_env *env)
 {
 	while (42)
 	{
-		display_calculs(env, 0);
 		handle_moves(env);
+		display_calculs(env, 0);
 		if (ft_sdl_keyhook(env) == 1)
 			return ;
 		SDL_RenderPresent(env->img);

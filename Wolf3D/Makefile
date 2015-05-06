@@ -6,7 +6,7 @@
 #    By: sboudouk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/29 17:28:23 by sboudouk          #+#    #+#              #
-#    Updated: 2015/04/29 17:35:54 by sboudouk         ###   ########.fr        #
+#    Updated: 2015/05/04 21:23:17 by sboudouk         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = wolf3d
 
-FLAGS = -Wall -Werror -Wextra -I ./includes -I ./includes/SDL2 -I ./libft/includes/
+FLAGS = -O3 -Wall -Werror -Wextra -I ./includes -I ./includes/SDL2 -I ./libft/includes/
 
 CC = gcc
 

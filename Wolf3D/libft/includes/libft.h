@@ -91,6 +91,8 @@ int		ft_isspace(char c);
 **Utilitaires
 */
 
+void	ft_print_tab(char **tab);
+void	ft_free_tab(int **tab, int length);
 int		get_next_line(int const fd, char **line);
 
 #endif

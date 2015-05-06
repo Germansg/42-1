@@ -37,7 +37,7 @@ void	handle_moves(t_env *e)
     }
     if (e->key.pad_right)
     {
-    	e->player.oldirx = e->player.dirx;;
+    	e->player.oldirx = e->player.dirx;
     	e->player.dirx = e->player.dirx * cos(-e->rotspeed) - e->player.diry * sin(-e->rotspeed);
     	e->player.diry = e->player.oldirx * sin(-e->rotspeed) + e->player.diry * cos(-e->rotspeed);
     	e->player.oldplanex = e->player.planex;

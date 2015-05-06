@@ -14,30 +14,12 @@
 
 void	display_calculs_part_3(t_env *e, t_play *p, int i)
 {
-	// Uint8 colorR;
- //    Uint8 colorG;
- //    Uint8 colorB;
-
- //    switch(e->map[p->mapx][p->mapy])
- //    {
- //      case 1:  colorR = 0xFF; colorG = 0x00; colorB = 0x00;  break; ///rouge
- //      case 2:  colorR = 0x00; colorG = 0xFF; colorB = 0x00;  break; ///vert
- //      case 3:  colorR = 0x00; colorG = 0x00; colorB = 0xFF;   break; ///bleu
- //      case 4:  colorR = 0xFF; colorG = 0xFF; colorB = 0xFF;  break; ///blanc
- //      default: colorR = 0xFF; colorG = 0xFF; colorB = 0x00; break; ///jaune
- //    }
-    // if (p->verti_ou_horizon == 1)
-    // {
-    // 	colorR /= 2;
-    // 	colorB /= 2;
-    // 	colorG /= 2;
-    // }
    	if (p->verti_ou_horizon)
-		p->mapy > e->player.posy ? p_pxl(e, 1.0, i, p->hauteurmur) :
-			p_pxl(e, 0.9, i, p->hauteurmur);
+		p->mapy > e->player.posy ? p_pxl(e, 1, i, p->hauteurmur) :
+			p_pxl(e, 2, i, p->hauteurmur);
 	else
-		p->mapx > e->player.posx ? p_pxl(e, 0.8, i, p->hauteurmur) :
-			p_pxl(e, 0.7, i, p->hauteurmur);
+		p->mapx > e->player.posx ? p_pxl(e, 3, i, p->hauteurmur) :
+			p_pxl(e, 4, i, p->hauteurmur);
 }
 
 void	display_calculs_part_2(t_env *e, t_play *p, int i)

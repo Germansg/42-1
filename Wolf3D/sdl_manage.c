@@ -12,6 +12,19 @@
 
 #include <wolf3d.h>
 
+void	ft_free_tab(void *tab, int length);
+
+void	ft_free_struct(t_env *e)
+{
+	if (e->map)
+		ft_free_tab(e->map, 16);
+	if (e->img)
+		SDL_DestroyRenderer(e->img);
+	if (e->window)
+		SDL_DestroyWindow(e->window);
+	free(e);
+}
+
 void	ft_key_is_pushed(t_env *env)
 {
 	if (env->event.key.keysym.sym == SDLK_a)

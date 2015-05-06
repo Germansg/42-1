@@ -94,6 +94,8 @@ typedef struct	s_env{
 
 /* sdl_manage.c */
 
+
+void	ft_free_struct(t_env *e);
 void	handle_moves(t_env *e);
 void	p_pxl(t_env *e, double cl, int x, int h);
 void	ft_key_is_pushed(t_env *env);

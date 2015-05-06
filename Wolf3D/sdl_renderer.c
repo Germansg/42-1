@@ -19,25 +19,31 @@ void	p_pxl(t_env *e, double cl, int x, int h)
 
 	i = 0;
 	start = e->height / 2 - h / 2;
-	SDL_SetRenderDrawColor(e->img, 50, 50, 200, 255);
+	SDL_SetRenderDrawColor(e->img, 0, 128, 255, 255);
 	while (i < start)
 	{
 		SDL_RenderDrawPoint(e->img, x, i);
 		++i;
 	}
 	i = 0;
-	SDL_SetRenderDrawColor(e->img, 200, 90, 50, 255);
+	if (cl == 1)
+		SDL_SetRenderDrawColor(e->img, 255, 153, 151, 255);
+	else if (cl == 2)
+		SDL_SetRenderDrawColor(e->img, 255, 51, 51, 255);
+	else if (cl == 3)
+		SDL_SetRenderDrawColor(e->img, 255, 255, 51, 255);
+	else
+		SDL_SetRenderDrawColor(e->img, 128, 255, 0, 255);
 	while (i < h)
 	{
 		SDL_RenderDrawPoint(e->img, x, start);
 		++i;
 		++start;
 	}
-	SDL_SetRenderDrawColor(e->img, 102, 102, 102, 255);
+	SDL_SetRenderDrawColor(e->img, 192, 192, 192, 255);
 	while (start < e->height)
 	{
 		SDL_RenderDrawPoint(e->img, x, start);
 		++start;
 	}
-	cl = 0;
 }

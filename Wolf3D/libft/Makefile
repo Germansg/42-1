@@ -70,7 +70,9 @@ SRC =	$(DIRSRC)ft_putnbr_fd.c \
 		$(DIRSRC)ft_strjoin.c \
 		$(DIRSRC)ft_strsplit.c \
 		$(DIRSRC)ft_strsub.c \
-		$(DIRSRC)get_next_line.c
+		$(DIRSRC)get_next_line.c \
+		$(DIRSRC)ft_print_tab.c \
+		$(DIRSRC)ft_free_tab.c
 
 all: $(NAME)
 
