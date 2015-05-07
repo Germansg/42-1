@@ -1,1 +1,2 @@
-42 git personal git repository , don't copy me , i'm bad.
+# 42 True Git
+This git seems legit m8.
