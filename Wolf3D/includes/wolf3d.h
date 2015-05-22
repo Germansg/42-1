@@ -13,14 +13,16 @@
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-#include <fcntl.h>
-#include <SDL.h>
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
+# include <fcntl.h>
+# include <time.h>
+# include <SDL.h>
 
-typedef struct 		s_play{
+typedef	struct		s_play{
 
 	double			camerax;
 	double			rayposx;
@@ -44,7 +46,7 @@ typedef struct 		s_play{
 
 }					t_play;
 
-typedef struct 		s_keyboard{
+typedef	struct		s_keyboard{
 
 	int				pad_left;
 	int				pad_right;
@@ -58,21 +60,21 @@ typedef struct 		s_keyboard{
 
 }					t_keyboard;
 
-typedef	struct		s_player{
+typedef struct		s_player{
 
-	double	oldirx;
-	double	oldiry;
-	double	oldplanex;
-	double	oldplaney;
-	double	posx;				/* Position du joueur */
-	double	posy;
-	double	dirx;				/* Direction que prends le joueur */
-	double	diry;
-	double	planex;				/* Plan de camera */
-	double	planey;
+	double			oldirx;
+	double			oldiry;
+	double			oldplanex;
+	double			oldplaney;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
 }					t_player;
 
-typedef struct	s_env{
+typedef	struct		s_env{
 
 	SDL_Window		*window;
 	SDL_Event		event;
@@ -89,18 +91,23 @@ typedef struct	s_env{
 	t_keyboard		key;
 	int				width;
 	int				height;
+	int				gen_random_map;
 
-}				t_env;
+}					t_env;
 
-/* sdl_manage.c */
+/*
+** Fonctions
+*/
 
-
-void	ft_free_struct(t_env *e);
-void	handle_moves(t_env *e);
-void	p_pxl(t_env *e, double cl, int x, int h);
-void	ft_key_is_pushed(t_env *env);
-int		ft_key_is_released(t_env *env);
-int		ft_win_ev(t_env *env);
-void	display_calculs(t_env *e, int i);
+void				ft_print_fps(t_env *env);
+int					**random_map(int pos_x, int pos_y);
+void				mouse_pos(t_env *env);
+void				ft_free_struct(t_env *e);
+void				handle_moves(t_env *e);
+void				p_pxl(t_env *e, double cl, int x, int h);
+void				ft_key_is_pushed(t_env *env);
+int					ft_key_is_released(t_env *env);
+int					ft_win_ev(t_env *env);
+void				display_calculs(t_env *e, int i);
 
 #endif

@@ -12,6 +12,18 @@
 
 #include <wolf3d.h>
 
+void	choose_color(t_env *e, int cl)
+{
+	if (cl == 1)
+		SDL_SetRenderDrawColor(e->img, 255, 153, 151, 255);
+	else if (cl == 2)
+		SDL_SetRenderDrawColor(e->img, 255, 51, 51, 255);
+	else if (cl == 3)
+		SDL_SetRenderDrawColor(e->img, 255, 255, 51, 255);
+	else
+		SDL_SetRenderDrawColor(e->img, 128, 255, 0, 255);
+}
+
 void	p_pxl(t_env *e, double cl, int x, int h)
 {
 	int	start;
@@ -26,14 +38,7 @@ void	p_pxl(t_env *e, double cl, int x, int h)
 		++i;
 	}
 	i = 0;
-	if (cl == 1)
-		SDL_SetRenderDrawColor(e->img, 255, 153, 151, 255);
-	else if (cl == 2)
-		SDL_SetRenderDrawColor(e->img, 255, 51, 51, 255);
-	else if (cl == 3)
-		SDL_SetRenderDrawColor(e->img, 255, 255, 51, 255);
-	else
-		SDL_SetRenderDrawColor(e->img, 128, 255, 0, 255);
+	choose_color(e, cl);
 	while (i < h)
 	{
 		SDL_RenderDrawPoint(e->img, x, start);

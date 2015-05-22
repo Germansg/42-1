@@ -12,7 +12,7 @@
 
 #include <wolf3d.h>
 
-int		**ft_create_map(void)
+int			**ft_create_map(void)
 {
 	int		**map;
 	int		x;
@@ -24,32 +24,21 @@ int		**ft_create_map(void)
 	{
 		map[y] = (int*)malloc(sizeof(int) * 15);
 		x = 0;
-		if (y == 0 || y == 15)
+		while (x < 16)
 		{
-			while (x < 16)
-			{
+			if (y == 0 || y == 15 || x == 0 || x == 15)
 				map[y][x] = 1;
-				x++;
-			}
-		}
-		else
-		{
-			while (x < 16)
-			{
-				if (x == 0 || x == 15)
-					map[y][x] = 1;
-				else
-					map[y][x] = 0;
-				x++;
-			}
+			else
+				map[y][x] = 0;
+			x++;
 		}
 		y++;
 	}
 	map[8][8] = 1;
-	return(map);
+	return (map);
 }
 
-void ft_sdl_init(t_env *e)
+void		ft_sdl_init(t_env *e)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	e->window = SDL_CreateWindow("Wolfd3D",
@@ -61,6 +50,7 @@ void ft_sdl_init(t_env *e)
 	e->height = 600;
 	e->a_time = 0;
 	e->old_time = 0;
+	e->gen_random_map = 0;
 	e->player.posx = 5.5;
 	e->player.posy = 5.5;
 	e->player.dirx = -1;
@@ -70,7 +60,7 @@ void ft_sdl_init(t_env *e)
 	return ;
 }
 
-int 	ft_sdl_keyhook(t_env *env)
+int			ft_sdl_keyhook(t_env *env)
 {
 	while (SDL_PollEvent(&(env->event)))
 	{
@@ -84,19 +74,27 @@ int 	ft_sdl_keyhook(t_env *env)
 	return (0);
 }
 
-void	ft_main_loop(t_env *env)
+void		ft_main_loop(t_env *env)
 {
 	while (42)
 	{
+		env->a_time = SDL_GetTicks();
 		handle_moves(env);
+		mouse_pos(env);
 		display_calculs(env, 0);
 		if (ft_sdl_keyhook(env) == 1)
 			return ;
-		SDL_RenderPresent(env->img);
+		if (env->gen_random_map == 1)
+		{
+			env->gen_random_map = 0;
+			ft_free_tab(env->map, 16);
+			env->map = random_map((int)env->player.posx, (int)env->player.posy);
+		}
+		ft_print_fps(env);
 	}
 }
 
-int		main(void)
+int			main(void)
 {
 	t_env	*env;
 	int		y;
@@ -109,5 +107,5 @@ int		main(void)
 	ft_sdl_init(env);
 	ft_main_loop(env);
 	free(env);
-	return(0);
+	return (0);
 }

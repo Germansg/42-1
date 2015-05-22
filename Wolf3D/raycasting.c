@@ -14,7 +14,14 @@
 
 void	display_calculs_part_3(t_env *e, t_play *p, int i)
 {
-   	if (p->verti_ou_horizon)
+	if (p->verti_ou_horizon == 0)
+		p->longueurmur = fabs((p->mapx - p->rayposx + (1 - p->etapex) / 2)
+		/ p->raydirx);
+	else
+		p->longueurmur = fabs((p->mapy - p->rayposy + (1 - p->etapey) / 2)
+		/ p->raydiry);
+	p->hauteurmur = abs((int)(e->height / p->longueurmur));
+	if (p->verti_ou_horizon)
 		p->mapy > e->player.posy ? p_pxl(e, 1, i, p->hauteurmur) :
 			p_pxl(e, 2, i, p->hauteurmur);
 	else
@@ -24,6 +31,10 @@ void	display_calculs_part_3(t_env *e, t_play *p, int i)
 
 void	display_calculs_part_2(t_env *e, t_play *p, int i)
 {
+	if (p->raydiry < 0 && (p->etapey = -1))
+		p->distmury = (p->rayposy - p->mapy) * p->dist2mury;
+	else if (p->raydiry > 0 && (p->etapey = 1))
+		p->distmury = (p->mapy + 1.0 - p->rayposy) * p->dist2mury;
 	while (p->toucher == 0)
 	{
 		if (p->distmurx < p->distmury)
@@ -41,13 +52,6 @@ void	display_calculs_part_2(t_env *e, t_play *p, int i)
 		if (e->map[p->mapx][p->mapy] > 0)
 			p->toucher = 1;
 	}
-	if (p->verti_ou_horizon == 0)
-		p->longueurmur = fabs((p->mapx - p->rayposx + (1 - p->etapex) / 2) 
-		/ p->raydirx);
-	else
-		p->longueurmur = fabs((p->mapy - p->rayposy + (1 - p->etapey) / 2)
-		/ p->raydiry);
-	p->hauteurmur = abs((int)(e->height / p->longueurmur));
 	display_calculs_part_3(e, p, i);
 }
 
@@ -64,17 +68,15 @@ void	display_calculs(t_env *e, int i)
 		p.raydiry = e->player.diry + e->player.planey * p.camerax;
 		p.mapx = (int)(p.rayposx);
 		p.mapy = (int)(p.rayposy);
-		p.dist2murx = sqrt(1 + (p.raydiry * p.raydiry) / (p.raydirx * p.raydirx));
-		p.dist2mury = sqrt(1 + (p.raydirx * p.raydirx) / (p.raydiry * p.raydiry));
+		p.dist2murx = sqrt\
+		(1 + (p.raydiry * p.raydiry) / (p.raydirx * p.raydirx));
+		p.dist2mury = sqrt\
+		(1 + (p.raydirx * p.raydirx) / (p.raydiry * p.raydiry));
 		p.toucher = 0;
 		if (p.raydirx < 0 && (p.etapex = -1))
 			p.distmurx = (p.rayposx - p.mapx) * p.dist2murx;
 		else if (p.raydirx > 0 && (p.etapex = 1))
 			p.distmurx = (p.mapx + 1.0 - p.rayposx) * p.dist2murx;
-		if (p.raydiry < 0 && (p.etapey = -1))
-			p.distmury = (p.rayposy - p.mapy) * p.dist2mury;
-		else if (p.raydiry > 0 && (p.etapey = 1))
-			p.distmury = (p.mapy + 1.0 - p.rayposy) * p.dist2mury;
 		display_calculs_part_2(e, &p, i);
 	}
 }
