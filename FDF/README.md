@@ -18,4 +18,6 @@ Used with mlx on X11 version.
 '*' , '/' , to up Z-Values.
 '+' , '-' , to use Zoom.
 
+You also need the "minilibx" to be installed on your device.
+
 </tbody>
