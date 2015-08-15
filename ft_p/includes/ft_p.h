@@ -28,10 +28,13 @@
 char *gg_tab[] = {
 	"ls",
 	"/bin/ls",
-	"cd",
-	"/usr/bin/cd",
 	"mkdir",
 	"/bin/mkdir",
+	"pwd",
+	"/bin/pwd"
 };
+
+#define END_FLAG "\n\n\x1b[32mEnd of operation. Everything seems OK.\x1b[0m\n\n"
+#define END_ERR_FLAG "\n\n\x1b[32mError. Try again.\x1b[0m\n\n"
 
 #endif

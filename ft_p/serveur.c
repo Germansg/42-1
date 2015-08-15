@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//Close les process fantome avec les ls -R + Ctrl-C (fermeture brutale du prgrm)
+//Faire un nouveau changedir
+
 #include <ft_p.h>
 
 void	usage(char *str)
@@ -34,27 +37,30 @@ int		init_serv(int port)
 	return(sock);
 }
 
-void	exec_cmd(char **line, int fd2client, int i)  //Utiliser mktemp pour ecrire dans un fichier, et lire dessus !
+void	exec_cmd(char **line, int fd2client, int i)
 {
 	int 	pid;
+	int		statut;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		if (gg_tab[i + 1])
 		{
-			printf("REKKKONNN [%s] %d\n", gg_tab[i + 1], fd2client);
+			printf("\nChemin reconnu = [%s]\n", gg_tab[i + 1]);
 			dup2(fd2client, 1);
 			dup2(fd2client, 2);
 			execv(gg_tab[i + 1], line);
 		}
 		else
-			return ;
+			return;
 	}
 	else
 	{
-		wait(NULL);
-		write(fd2client, "REKT\n", 5);
+		if (waitpid(pid, &statut, 0) == -1)
+			write(fd2client, END_ERR_FLAG, 51);
+		else
+			write(fd2client, END_FLAG, 51);
 	}
 }
 
@@ -62,21 +68,17 @@ void	ft_check_entry(int fd2client, int port)
 {
 	int 	i;
 	int 	rekt;
-	//char	*trimed;
 	char 	**tab;
 	char	line[250002];
 
 	(void)port;
-	while ((rekt = read(fd2client, line, 250001))) //J'ai qu'un appel qui passe, chelou
+	while ((rekt = read(fd2client, line, 250001)))
 	{
 		line[rekt] = '\0';
-		if (ft_strlen(line) > 0)
+		if (rekt > 0)
 		{
-			printf("ap = [%s]\n", line);
-			//strimed = ft_strtrim(line);
+			printf("> Client[%d] asked for [%s].\n", fd2client, line);
 			tab = ft_strsplit(line, ' ');
-			ft_putstr("printing tab=\n");
-			ft_print_tab(tab);
 			i = 0;
 			while (gg_tab[i])
 			{
@@ -85,13 +87,8 @@ void	ft_check_entry(int fd2client, int port)
 				i++;
 			}
 		}
-		printf("in GNL\n");
 	}
-}
-
-void	treatment(int fd2client, int port)
-{
-		ft_check_entry(fd2client, port);
+	printf("\n> \x1b[31mClient[%d] disconnected !\x1b[0m\n", fd2client);
 }
 
 void	serv_action(int port)
@@ -105,15 +102,12 @@ void	serv_action(int port)
 	{
 		if ((ret = accept(port, (struct sockaddr*)&csin, &cslen)) > 0)
 		{
+			printf("\n> \x1b[32mClient[%d] connected !\x1b[0m\n\n", ret);
 			pid = fork();
 			if (pid == 0)
-				treatment(ret, port);
+				ft_check_entry(ret, port);
 		}
-		printf("I BOUKLEUH\n");
 	}
-	// printf("HELOW\n");
-	// ret = accept(port, (struct sockaddr*)&csin, &cslen);
-	// write(ret, "coucou!\n", 8);
 }
 
 int		main(int ac, char **av)
@@ -122,8 +116,7 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 		usage(av[0]);
-	port = ft_atoi(av[1]);
-	port = init_serv(port);
+	port = init_serv(ft_atoi(av[1]));
 	serv_action(port);
 	close(port);
 	return (0);

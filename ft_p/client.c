@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//Changer le signal du client pour le C, envoyer un exit au serv.
+
 #include <ft_p.h>
 
 void	usage(char *str)
@@ -39,30 +41,30 @@ void	treatement(int port)
 	char		buf[200];
 	int 		ret;
 
-	while (get_next_line(0, &line) > 0)
+	write(1, "\x1b[32m\n>>>> \x1b[0m", 15);
+	while (get_next_line(0, &line))
 	{
 		write(port, line, ft_strlen(line));
-		printf("APRES APRES\n");
+		ret = 0;
 		while((ret = read(port, buf, 199)))
 		{
 			buf[ret] = '\0';
 			if (ret > 0)
-			{
 				printf("%s", buf);
-			}
+			if (ft_strstr(buf, END_FLAG) || ft_strstr(buf, END_ERR_FLAG))
+				break ;
 		}
+		write(1, "\x1b[32m\n>>>> \x1b[0m", 15);
 	}
 }
 
 int		main(int ac, char **av)
 {
-	int		port;
 	int 	sock;
 
 	if (ac != 3)
 		usage(av[0]);
-	port = ft_atoi(av[2]);
-	sock = init_client(av[1], port);
+	sock = init_client(av[1], ft_atoi(av[2]));
 	treatement(sock);
 	close(sock);
 	return (0);
