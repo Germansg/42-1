@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FT_P_H
-# define _FT_P_H
+#ifndef _FT_P_H_
+# define _FT_P_H_
 
 # include <libft.h>
 # include <stdio.h>
@@ -24,6 +24,9 @@
 # include <math.h>
 # include <fcntl.h>
 # include <time.h>
+# include <limits.h>
+
+char home_dir[PATH_MAX];
 
 char *gg_tab[] = {
 	"ls",
@@ -31,10 +34,13 @@ char *gg_tab[] = {
 	"mkdir",
 	"/bin/mkdir",
 	"pwd",
-	"/bin/pwd"
+	"/bin/pwd",
+	"not"
 };
 
-#define END_FLAG "\n\n\x1b[32mEnd of operation. Everything seems OK.\x1b[0m\n\n"
-#define END_ERR_FLAG "\n\n\x1b[32mError. Try again.\x1b[0m\n\n"
+#define END_FLAG "\n\n\x1b[32mOperation OK.\x1b[0m\n\n"
+#define END_ERR_FLAG "\n\n\x1b[31mError. Retry.\x1b[0m\n\n"
+
+// int		ft_spec_commands(char **tab, int fd2client);
 
 #endif

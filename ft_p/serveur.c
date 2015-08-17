@@ -21,6 +21,30 @@ void	usage(char *str)
 	exit(-1);
 }
 
+int		manage_chdir(char *path)
+{
+	chdir(path);
+	printf("%s\n", home_dir);
+	return (1);
+}
+
+void	spec_commands(char **tab, int fd2client)
+{
+	int		ret;
+
+	ret = 0;
+	if (ft_strcmp("cd", tab[0]) == 0)
+		ret = manage_chdir(tab[1]);
+	else if (ft_strcmp("get", tab[0]) == 0)
+		ret = 0;
+	else if (ft_strcmp("put", tab[0]) == 0)
+		ret = 0;
+	if (ret != 0)
+		write(fd2client, END_FLAG, 51);
+	else
+		write(fd2client, END_ERR_FLAG, 30);
+}
+
 int		init_serv(int port)
 {
 	int 				sock;
@@ -47,7 +71,7 @@ void	exec_cmd(char **line, int fd2client, int i)
 	{
 		if (gg_tab[i + 1])
 		{
-			printf("\nChemin reconnu = [%s]\n", gg_tab[i + 1]);
+			printf("\nChemin reconnu = [%s] line[0] == [%s].\n", gg_tab[i + 1], line[0]);
 			dup2(fd2client, 1);
 			dup2(fd2client, 2);
 			execv(gg_tab[i + 1], line);
@@ -58,7 +82,7 @@ void	exec_cmd(char **line, int fd2client, int i)
 	else
 	{
 		if (waitpid(pid, &statut, 0) == -1)
-			write(fd2client, END_ERR_FLAG, 51);
+			write(fd2client, END_ERR_FLAG, 30);
 		else
 			write(fd2client, END_FLAG, 51);
 	}
@@ -83,9 +107,15 @@ void	ft_check_entry(int fd2client, int port)
 			while (gg_tab[i])
 			{
 				if (ft_strcmp(gg_tab[i], tab[0]) == 0)
+				{
 					exec_cmd(tab, fd2client, i);
+					break ;
+				}
 				i++;
 			}
+			printf("i = [%d]\n", i);
+			if (i >= 6)
+				spec_commands(tab, fd2client);
 		}
 	}
 	printf("\n> \x1b[31mClient[%d] disconnected !\x1b[0m\n", fd2client);
@@ -117,6 +147,7 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		usage(av[0]);
 	port = init_serv(ft_atoi(av[1]));
+	getcwd(home_dir, PATH_MAX);
 	serv_action(port);
 	close(port);
 	return (0);

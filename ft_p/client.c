@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//Changer le signal du client pour le C, envoyer un exit au serv.
+//Changer le signal du client pour le ctrl-C, envoyer un exit au serv.
 
 #include <ft_p.h>
 
@@ -38,21 +38,25 @@ int		init_client(char *addr, int port)
 void	treatement(int port)
 {
 	char 		*line;
-	char		buf[200];
+	char		buf[2000];
 	int 		ret;
 
 	write(1, "\x1b[32m\n>>>> \x1b[0m", 15);
 	while (get_next_line(0, &line))
 	{
-		write(port, line, ft_strlen(line));
-		ret = 0;
-		while((ret = read(port, buf, 199)))
+		line = ft_strtrim(line);
+		if (ft_strlen(line) > 0)
 		{
-			buf[ret] = '\0';
-			if (ret > 0)
-				printf("%s", buf);
-			if (ft_strstr(buf, END_FLAG) || ft_strstr(buf, END_ERR_FLAG))
-				break ;
+			write(port, line, ft_strlen(line));
+			ret = 0;
+			while((ret = read(port, buf, 1999)))
+			{
+				buf[ret] = '\0';
+				if (ret > 0)
+					printf("%s", buf);
+				if (ft_strstr(buf, END_FLAG) || ft_strstr(buf, END_ERR_FLAG))
+					break ;
+			}
 		}
 		write(1, "\x1b[32m\n>>>> \x1b[0m", 15);
 	}
