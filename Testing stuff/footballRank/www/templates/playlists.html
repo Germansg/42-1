@@ -1,14 +1,13 @@
 <ion-view view-title="Classement des joueurs">
   <ion-content>
       <h2>Trier par :</h2>
-      <div class="buttons" ng-click="clickPredicateAge()">
-          <button class="button">Age</button>
+      <div class="buttons">
+          <button id="age" class="button button-balanced" ng-click="clickPredicateAge()">Age</button>
+          <button id="name" class="button button-balanced" ng-click="clickPredicateName()">Nom</button>
       </div>
-      <div class="buttons" ng-click="clickPredicateName()">
-          <button class="button">Nom</button>
-      </div>
+      <input type="text" placeholder="Rechercher un joueur..." data-ng-model="searchTest">
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists | orderBy: orderByPredicate : orderByReverse" href="#/app/playlists/{{playlist.age}}">
+      <ion-item ng-repeat="playlist in playlists | orderBy: orderByPredicate : orderByReverse | filter:searchTest" href="#/app/playlists/{{playlist.age}}">
         {{playlist.name}} - {{playlist.age}} ans
       </ion-item>
     </ion-list>

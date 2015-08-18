@@ -63,6 +63,9 @@ angular.module('starter.controllers', [])
       { name: 'B Silva', age: 31 },
       { name: 'C Julien', age: 29 },
   ];
+
+
+
         $scope.clickPredicateName = function(){
             $scope.orderByReverse = !$scope.orderByReverse;
             $scope.orderByPredicate = 'name';
@@ -84,8 +87,8 @@ angular.module('starter.controllers', [])
 
         $scope.giveAlert = function () {
             var alertPopup = $ionicPopup.alert({
-                title: 'TIBI CE PD',
-                template: "Le zizi il aime ça"
+                title: 'Popup ?',
+                template: "Popup !"
             });
         }
 });
