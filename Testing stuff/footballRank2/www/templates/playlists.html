@@ -1,0 +1,15 @@
+<ion-view view-title="Classement des joueurs">
+  <ion-content>
+      <h2>Trier par :</h2>
+      <div class="buttons">
+          <button id="age" class="button button-balanced" ng-click="clickPredicateScore()">Score</button>
+          <button id="name" class="button button-balanced" ng-click="clickPredicateName()">Nom</button>
+      </div>
+      <input type="text" placeholder="Rechercher un joueur..." data-ng-model="searchTest">
+    <ion-list>
+      <ion-item ng-repeat="playlist in playlists | orderBy: orderByPredicate : orderByReverse | filter:searchTest" href="#/app/playlists/{{playlist.score}}">
+        {{playlist.name}} - {{playlist.score}} Points
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
