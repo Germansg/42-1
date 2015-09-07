@@ -18,7 +18,7 @@ NAME = ft_minishell1
 
 FLAGS = -Wall -Werror -Wextra
 
-CC = gcc
+CC = clang
 
 
 all: lib $(NAME)

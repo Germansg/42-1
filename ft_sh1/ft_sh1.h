@@ -28,6 +28,7 @@
 # include <string.h>
 # include <limits.h>
 # include <signal.h>
+# include <sys/wait.h>
 
 # define CMD_NOT_FOUND			1
 # define CD_NOT_FOUND 			2
